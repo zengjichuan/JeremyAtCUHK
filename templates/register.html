@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>User register</title>
+</head>
+<body>
+    <h1>User register</h1>
+    {% if form.errors %}
+    <p style="color: red;">
+        Please correct the error{{  form.errors | pluralize }} below
+    </p>
+    {% endif %}
+    <form action="." method="POST">
+        <table>
+            {% csrf_token %}
+            {{ form.as_table }}
+        </table>
+        <p><input type="submit" value="Submit"></p>
+    </form>
+</body>
+</html>
