@@ -14,6 +14,7 @@ class EmailList(models.Model):
 class CheckList(models.Model):
     emailid = models.IntegerField()
     emailqr = models.CharField(max_length=256)
+    checkin = models.CharField(max_length=10)
 
 class Relation(models.Model):
     fromid = models.IntegerField()

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render_to_response
 from .forms import UserForm
-from django.http import HttpRequest, HttpResponseRedirect
+from django.http import HttpRequest, HttpResponseRedirect, HttpResponse
 from tickets.MyException import UserAlreadyRegisteredError
 from tickets.models import *
 from django.template import RequestContext
@@ -14,39 +14,49 @@ import os
 
 # Create your views here.
 
-def name(request):
-    return render_to_response('thanks.html')
-
+# Register page
 def register(requset):
     if requset.method == 'POST':
         form = UserForm(requset.POST)
         if form.is_valid():
+            name, email, school, chris, invitelst = parse_input(form)
             try:
-                email_to_send = parse_insertdb(form)
+                email_to_send = parse_insertdb(name, email, school, chris, invitelst)
             except Exception as e:
                 print e.message
                 return HttpResponseRedirect('/tickets/sorry/')
             if email_to_send:
-                email, email_en, invite_email, error_email = email_to_send
-                # the temp location of qr code is qrimg/
-                qrfile_path = generate_qrcode(email_en)
-                send_email(email, invite_email, qrfile_path)
+                email, email_qr, email_id, invite_email, error_email = email_to_send
+                qrfile_path = generate_qrcode(email_qr)
+                insert_checklist(email_id, email_qr)
+                send_email(name, email, invite_email, qrfile_path)
                 requset.session['errors'] = error_email
             return HttpResponseRedirect('/tickets/thanks/')
     else:
         form = UserForm()
     return render_to_response('register.html', {'form': form}, RequestContext(requset))
 
-def parse_insertdb(form):
-    # parse input data
+# check request from mobile
+def checkin(request):
+    if request.method == 'GET':
+        if 'email' in request.GET and request.GET['email']:
+            checkinfo = request.GET['email']
+            check_msg = checkdb(checkinfo)
+            return HttpResponse(check_msg)
+
+##############################################################
+def parse_input(form):
     name = form.cleaned_data['name']
     email = form.cleaned_data['email']
     school = form.cleaned_data['school']
     chris = True and form.cleaned_data['chris'] or 'None'
     invite = form.cleaned_data['invite']
     invitelst = invite and invite.split(';') or []
+    return name, email, school, chris, invitelst
 
-    # insert into dataset
+def parse_insertdb(name, email, school, chris, invitelst):
+
+    # insert into database
     # check if exist in email list
     email_item = EmailList.objects.filter(email=email)
     if not email_item:
@@ -62,7 +72,7 @@ def parse_insertdb(form):
     UserInfo.objects.create(name=name, emailid=email_id, school=school, chris=chris)
 
     # generate security email address and insert into check list
-    email_en = email + '_' + str(random.randint(10, 99))
+    email_qr = email + '_' + str(random.randint(10, 99))
 
     # insert into relation list
 
@@ -82,15 +92,19 @@ def parse_insertdb(form):
         except ValidationError:
             error_email_list.append(iemail)
             print iemail, 'format error'
-    return email, email_en, invite_send_list, error_email_list
+    return email, email_qr, email_id, invite_send_list, error_email_list
 
 def generate_qrcode(url):
     code = pyqrcode.create(url)
+    # the temp location of qr code is qrimg/
     file_path = os.path.join('qrimg', url + '.png')
     code.png(file_path, scale=8)
     return file_path
 
-def send_email(email, invite_email_list, qrfile_path):
+def insert_checklist(email_id, email_qr):
+    CheckList.objects.create(emailid=email_id, emailqr=email_qr, checkin='No')
+
+def send_email(name, email, invite_email_list, qrfile_path):
     email_msg = EmailMultiRelated('Jeremy At CUHK', 'Plain text version',
                                   'zengjichuan@outlook.com', [email])
     email_html = '<html><body><p>This is a <strong>ticket</strong> message. ' \
@@ -102,10 +116,22 @@ def send_email(email, invite_email_list, qrfile_path):
 
     invite_msg  = EmailMultiRelated('Invite: Jeremy At CUHK', 'Plain text version',
                               'zengjichuan@outlook.com', invite_email_list)
-    html = '<html><body><p>This is a <strong>invitation</strong> message.</p></body></html>'
+    html = '<html><body><p>This is a <strong>invitation</strong> message from your friend %s.</p>' \
+           '</body></html>'% name
     invite_msg.attach_alternative(html, 'text/html')
     invite_msg.send()
     print 'Emails have been sent!'
+
+def checkdb(info):
+    check = CheckList.objects.filter(emailqr=info)
+    if check:
+        if check.checkin == 'No':
+            check.update(checkin='Yes')
+            return 'Welcome!'
+        else:
+            return 'Already checked!'
+    else:
+        return "No register!"
 
 def thanks(request):
     if request.session.has_key('errors'):

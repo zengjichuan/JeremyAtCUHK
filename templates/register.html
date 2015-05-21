@@ -2,21 +2,58 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>User register</title>
+    <title>The Story of Linsanity (2) – My Laughable Dream</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
 </head>
 <body>
-    <h1>User register</h1>
-    {% if form.errors %}
-    <p style="color: red;">
-        Please correct the error{{  form.errors | pluralize }} below
-    </p>
-    {% endif %}
-    <form action="." method="POST">
-        <table>
+<div class="container">
+    <form id="signup" action="." method="POST">
+        <div class="header">
+            <h3>The Story of Linsanity (2) <br> My Laughable Dream</h3>
+            <h4>林書豪旋風（二）：被嘲笑的夢想</h4>
+            <p>You have to fill out this form to get the ticket</p>
+        </div>
+        <div class="sep"></div>
+        <div class="inputs">
             {% csrf_token %}
-            {{ form.as_table }}
-        </table>
-        <p><input type="submit" value="Submit"></p>
+            {{ form.name.errors }}
+            <label for="id_name">Name:</label>
+            {{ form.name }}
+            <br>
+            {{ form.email.errors }}
+            <label for="id_email">Email:</label>
+            {{ form.email }}
+
+            {{ form.school.errors }}
+            <label for="id_school">Which university are you from?</label>
+            {{ form.school }}
+
+            {{ form.chris.errors }}
+            <label for="id_chris">Are you a Christian?</label>
+            {{ form.chris }}
+
+            {{ form.invite.errors }}
+            <label for="id_invite">Whom do you want to invite?</label>
+            {{ form.invite }}
+
+            <input id="submit" type="submit" value="SIGN UP FOR TICKET NOW">
+
+        </div>
     </form>
+</div>
+{#    <h1>User register</h1>#}
+{#    {% if form.errors %}#}
+{#    <p style="color: red;">#}
+{#        Please correct the error{{  form.errors | pluralize }} below#}
+{#    </p>#}
+{#    {% endif %}#}
+{#    <form action="." method="POST">#}
+{#        <table>#}
+{#            {% csrf_token %}#}
+{#            {{ form.as_table }}#}
+{#        </table>#}
+{#        <p><input type="submit" value="Submit"></p>#}
+{#    </form>#}
 </body>
 </html>
