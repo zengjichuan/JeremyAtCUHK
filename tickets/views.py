@@ -11,6 +11,7 @@ from EmailMultiRelated import *
 import pyqrcode
 import random
 import os
+import re
 
 # Create your views here.
 
@@ -51,7 +52,7 @@ def parse_input(form):
     school = form.cleaned_data['school']
     chris = True and form.cleaned_data['chris'] or 'None'
     invite = form.cleaned_data['invite']
-    invitelst = invite and invite.split(';') or []
+    invitelst = invite and re.split(r'[ ;\n\t]+', invite) or []
     return name, email, school, chris, invitelst
 
 def parse_insertdb(name, email, school, chris, invitelst):
