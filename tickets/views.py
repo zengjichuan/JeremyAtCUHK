@@ -52,7 +52,7 @@ def parse_input(form):
     school = form.cleaned_data['school']
     chris = True and form.cleaned_data['chris'] or 'None'
     invite = form.cleaned_data['invite']
-    invitelst = invite and re.split(r'[ ;\n\t]+', invite) or []
+    invitelst = invite and re.split(r'[ ;\n\t\r]+', invite) or []
     return name, email, school, chris, invitelst
 
 def parse_insertdb(name, email, school, chris, invitelst):
@@ -81,18 +81,19 @@ def parse_insertdb(name, email, school, chris, invitelst):
     error_email_list = []
     for iemail in invitelst:
         # check invite email format
-        try:
-            validate_email(iemail)
-            email_item = EmailList.objects.filter(email=iemail)
-            if not email_item:
-                email_invite = EmailList.objects.create(email=iemail)
-            else:
-                email_invite = email_item[0]
-            Relation.objects.create(fromid=email_id, toid=email_invite.id)
-            invite_send_list.append(iemail)
-        except ValidationError:
-            error_email_list.append(iemail)
-            print iemail, 'format error'
+        if iemail.strip():
+            try:
+                validate_email(iemail)
+                email_item = EmailList.objects.filter(email=iemail)
+                if not email_item:
+                    email_invite = EmailList.objects.create(email=iemail)
+                else:
+                    email_invite = email_item[0]
+                Relation.objects.create(fromid=email_id, toid=email_invite.id)
+                invite_send_list.append(iemail)
+            except ValidationError:
+                error_email_list.append(iemail)
+                print iemail, 'format error'
     return email, email_qr, email_id, invite_send_list, error_email_list
 
 def generate_qrcode(url):
