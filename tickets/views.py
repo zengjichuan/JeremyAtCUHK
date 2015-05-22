@@ -48,11 +48,11 @@ def checkin(request):
 ##############################################################
 def parse_input(form):
     name = form.cleaned_data['name']
-    email = form.cleaned_data['email']
+    email = form.cleaned_data['email'].lower()
     school = form.cleaned_data['school']
     chris = True and form.cleaned_data['chris'] or 'None'
     invite = form.cleaned_data['invite']
-    invitelst = invite and re.split(r'[ ;\n\t\r]+', invite) or []
+    invitelst = [i.lower() for i in (invite and re.split(r'[ ;\n\t\r]+', invite) or [])]
     return name, email, school, chris, invitelst
 
 def parse_insertdb(name, email, school, chris, invitelst):
