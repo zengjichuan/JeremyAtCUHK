@@ -114,3 +114,12 @@ EMAIL_HOST_USER = 'zengjichuan@outlook.com'
 EMAIL_HOST_PASSWORD = '31415926530Z'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
+TICKET_NUM = 2

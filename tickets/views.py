@@ -8,6 +8,8 @@ from django.template import RequestContext
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from EmailMultiRelated import *
+from django.core.cache import cache
+from MyException import UserAlreadyRegisteredError, TicketSoldOutError
 import pyqrcode
 import random
 import os
@@ -24,7 +26,8 @@ def register(requset):
             try:
                 email_to_send = parse_insertdb(name, email, school, chris, invitelst)
             except Exception as e:
-                print e.message
+                msg = e.message
+                requset.session['msg'] = msg
                 return HttpResponseRedirect('/tickets/sorry/')
             if email_to_send:
                 email, email_qr, email_id, invite_email, error_email = email_to_send
@@ -67,7 +70,7 @@ def parse_insertdb(name, email, school, chris, invitelst):
         email_id = email_item[0].id
         # check if exist in user info
         if UserInfo.objects.filter(emailid=email_id):
-            raise UserAlreadyRegisteredError('User already been registered!')
+            raise UserAlreadyRegisteredError()
 
     # insert into user info
     UserInfo.objects.create(name=name, emailid=email_id, school=school, chris=chris)
@@ -94,6 +97,10 @@ def parse_insertdb(name, email, school, chris, invitelst):
             except ValidationError:
                 error_email_list.append(iemail)
                 print iemail, 'format error'
+    # check if there has enough tickets
+    if cache.get('tickets') <= 0:
+        raise TicketSoldOutError()
+    cache.decr('tickets')
     return email, email_qr, email_id, invite_send_list, error_email_list
 
 def generate_qrcode(url):
@@ -142,4 +149,7 @@ def thanks(request):
     return render_to_response('thanks.html', locals())
 
 def sorry(request):
-    return render_to_response('sorry.html')
+    if request.session.has_key('msg'):
+        errors = request.session.get('msg')
+        del request.session['msg']
+    return render_to_response('sorry.html', locals())
