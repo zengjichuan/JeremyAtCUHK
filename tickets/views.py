@@ -98,6 +98,7 @@ def parse_insertdb(name, email, school, chris, invitelst):
                 error_email_list.append(iemail)
                 print iemail, 'format error'
     # check if there has enough tickets
+    print 'tickets left', cache.get('tickets')
     if cache.get('tickets') <= 0:
         raise TicketSoldOutError('')
     cache.decr('tickets')
@@ -117,13 +118,13 @@ def send_email(name, email, invite_email_list, qrfile_path):
     email_msg = EmailMultiRelated('Jeremy At CUHK', 'Plain text version',
                                   'zengjichuan@outlook.com', [email])
     email_html = '<html><body><p>This is a <strong>ticket</strong> message. ' \
-                 '<a href="mailto:zengjichuan@outlook.com">Email</a> me back.</p>' \
+                 'For any problem, <a href="mailto:zengjichuan@outlook.com">Email</a> me back.</p>' \
                  '<img src="%s"></body></html>' % os.path.basename(qrfile_path)
     email_msg.attach_alternative(email_html, 'text/html')
     email_msg.attach_related_file(qrfile_path)
     email_msg.send()
 
-    invite_msg  = EmailMultiRelated('Invite: Jeremy At CUHK', 'Plain text version',
+    invite_msg = EmailMultiRelated('Invite: Jeremy At CUHK', 'Plain text version',
                               'zengjichuan@outlook.com', invite_email_list)
     html = '<html><body><p>This is a <strong>invitation</strong> message from your friend %s.</p>' \
            '</body></html>'% name

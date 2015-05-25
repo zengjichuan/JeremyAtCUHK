@@ -110,7 +110,7 @@ TEMPLATE_DIRS = (
 
 import djcelery
 djcelery.setup_loader()
-EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
+# EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
 
 EMAIL_HOST = 'smtp-mail.outlook.com'
 EMAIL_HOST_USER = 'zengjichuan@outlook.com'
