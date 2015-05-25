@@ -22,4 +22,4 @@ class UserForm(forms.Form):
     email = forms.EmailField()
     school = forms.ChoiceField(choices=SCHOOL_CHOICES)
     chris = forms.ChoiceField(choices=CHRISTIAN_CHOICES, widget=forms.RadioSelect, required=False)
-    invite = forms.CharField(widget=forms.Textarea, required=False)
+    invite = forms.CharField(widget=forms.Textarea, required=False, max_length=512)

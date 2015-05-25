@@ -70,7 +70,7 @@ def parse_insertdb(name, email, school, chris, invitelst):
         email_id = email_item[0].id
         # check if exist in user info
         if UserInfo.objects.filter(emailid=email_id):
-            raise UserAlreadyRegisteredError()
+            raise UserAlreadyRegisteredError('')
 
     # insert into user info
     UserInfo.objects.create(name=name, emailid=email_id, school=school, chris=chris)
@@ -99,7 +99,7 @@ def parse_insertdb(name, email, school, chris, invitelst):
                 print iemail, 'format error'
     # check if there has enough tickets
     if cache.get('tickets') <= 0:
-        raise TicketSoldOutError()
+        raise TicketSoldOutError('')
     cache.decr('tickets')
     return email, email_qr, email_id, invite_send_list, error_email_list
 
@@ -150,6 +150,6 @@ def thanks(request):
 
 def sorry(request):
     if request.session.has_key('msg'):
-        errors = request.session.get('msg')
+        msg = request.session.get('msg')
         del request.session['msg']
     return render_to_response('sorry.html', locals())

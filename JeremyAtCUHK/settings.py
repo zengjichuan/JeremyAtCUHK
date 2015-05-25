@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tickets',
+    'djcelery',
     'djcelery_email',
 )
 
@@ -107,7 +108,9 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
 )
 
-# EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
+import djcelery
+djcelery.setup_loader()
+EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
 
 EMAIL_HOST = 'smtp-mail.outlook.com'
 EMAIL_HOST_USER = 'zengjichuan@outlook.com'
@@ -122,4 +125,4 @@ CACHES = {
     }
 }
 
-TICKET_NUM = 2
+TICKET_NUM = 100

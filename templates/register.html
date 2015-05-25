@@ -17,24 +17,25 @@
         <div class="sep"></div>
         <div class="inputs">
             {% csrf_token %}
-            {{ form.name.errors }}
             <label for="id_name">Name:</label>
+            {{ form.name.errors }}
             {{ form.name }}
+
             <br>
-            {{ form.email.errors }}
             <label for="id_email">Email:</label>
+            {{ form.email.errors }}
             {{ form.email }}
 
-            {{ form.school.errors }}
             <label for="id_school">Which university are you from?</label>
+            {{ form.school.errors }}
             {{ form.school }}
 
-            {{ form.chris.errors }}
             <label for="id_chris"><html>Are you a Christian? <span style="color: #8f8f8f">(Optional)</span></html></label>
+            {{ form.chris.errors }}
             {{ form.chris }}
 
-            {{ form.invite.errors }}
             <label for="id_invite"><html>Whom do you want to invite?<br><span style="color: #8f8f8f">(Optional, emails separate by ; or Space or Enter)</span></html></label>
+            {{ form.invite.errors }}
             {{ form.invite }}
 
             <input id="submit" type="submit" value="SIGN UP FOR TICKET NOW">

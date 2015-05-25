@@ -173,3 +173,28 @@ input:-moz-placeholder {
         from(#a4b0cb),
         to(#b9c5dd));
 }
+
+#signup .inputs input[type=radio]:not(old){
+    display: inline-block;
+    float: left;
+    margin-right: 10px;
+    margin-top: 3px;
+}
+
+#signup .inputs #id_chris {
+    padding: 0 10px;
+}
+#id_chris li {
+    display: block;
+}
+ul.errorlist {
+    margin: 0;
+    padding: 0;
+}
+
+.errorlist li{
+    color: red;
+    display: block;
+    font-size: 10px;
+    margin: 0,0,3px;
+}
