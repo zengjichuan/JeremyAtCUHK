@@ -22,4 +22,5 @@ urlpatterns = patterns('',
     url(r'^tickets/$', views.register),
     (r'^tickets/thanks/$', views.thanks),
     (r'^tickets/sorry/$', views.sorry),
+    (r'^tickets/check/$', views.checkin),
 )
