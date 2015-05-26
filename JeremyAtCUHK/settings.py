@@ -118,6 +118,8 @@ EMAIL_HOST_PASSWORD = '31415926530Z'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
+TIMEOUT = None
+
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
