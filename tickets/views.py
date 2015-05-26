@@ -135,7 +135,7 @@ def send_email(name, email, invite_email_list, qrfile_path):
 def checkdb(info):
     check = CheckList.objects.filter(emailqr=info)
     if check:
-        if check.checkin == 'No':
+        if check[0].checkin == 'No':
             check.update(checkin='Yes')
             return 'Welcome!'
         else:
