@@ -22,9 +22,9 @@ def register(requset):
     if requset.method == 'POST':
         form = UserForm(requset.POST)
         if form.is_valid():
-            name, email, school, chris, invitelst = parse_input(form)
+            name, email, school, invitelst = parse_input(form)
             try:
-                email_to_send = parse_insertdb(name, email, school, chris, invitelst)
+                email_to_send = parse_insertdb(name, email, school, invitelst)
             except Exception as e:
                 msg = e.message
                 requset.session['msg'] = msg
@@ -53,12 +53,11 @@ def parse_input(form):
     name = form.cleaned_data['name']
     email = form.cleaned_data['email'].lower()
     school = form.cleaned_data['school']
-    chris = True and form.cleaned_data['chris'] or 'None'
     invite = form.cleaned_data['invite']
     invitelst = [i.lower() for i in (invite and re.split(r'[ ;\n\t\r]+', invite) or [])]
-    return name, email, school, chris, invitelst
+    return name, email, school, invitelst
 
-def parse_insertdb(name, email, school, chris, invitelst):
+def parse_insertdb(name, email, school, invitelst):
 
     # insert into database
     # check if exist in email list
@@ -73,7 +72,7 @@ def parse_insertdb(name, email, school, chris, invitelst):
             raise UserAlreadyRegisteredError('')
 
     # insert into user info
-    UserInfo.objects.create(name=name, emailid=email_id, school=school, chris=chris)
+    UserInfo.objects.create(name=name, emailid=email_id, school=school)
 
     # generate security email address and insert into check list
     email_qr = email + '_' + str(random.randint(10, 99))
@@ -126,7 +125,8 @@ def send_email(name, email, invite_email_list, qrfile_path):
 
     invite_msg = EmailMultiRelated('Invite: Jeremy At CUHK', 'Plain text version',
                               'zengjichuan@outlook.com', invite_email_list)
-    html = '<html><body><p>This is a <strong>invitation</strong> message from your friend %s.</p>' \
+    html = '<html><body><p>This is a <strong>invitation</strong> message from your friend %s.' \
+           'Please enter this <a href="http://183.62.156.108:8001/tickets/">link</a> to get ticket.</p>' \
            '</body></html>'% name
     invite_msg.attach_alternative(html, 'text/html')
     invite_msg.send()

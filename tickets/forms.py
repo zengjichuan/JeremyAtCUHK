@@ -10,7 +10,8 @@ SCHOOL_CHOICES = (
     ('HKUST', 'Hong Kong University of Science and Technology'),
     ('LNU', 'Lingnan University'),
     ('OUHK', 'Open University of Hong Kong'),
-    ('Other', 'Other'),
+    ('OtherU', 'Other universities'),
+    ('Other', 'Others'),
 )
 
 CHRISTIAN_CHOICES = (
@@ -21,5 +22,5 @@ class UserForm(forms.Form):
     name = forms.CharField(max_length=30)
     email = forms.EmailField()
     school = forms.ChoiceField(choices=SCHOOL_CHOICES)
-    chris = forms.ChoiceField(choices=CHRISTIAN_CHOICES, widget=forms.RadioSelect, required=False)
+    # chris = forms.ChoiceField(choices=CHRISTIAN_CHOICES, widget=forms.RadioSelect, required=False)
     invite = forms.CharField(widget=forms.Textarea, required=False, max_length=512)

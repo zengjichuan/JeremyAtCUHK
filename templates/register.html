@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>The Story of Linsanity (2) – My Laughable Dream</title>
+    <title>Linsanity 2.0 – Redefine Success</title>
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
 </head>
@@ -10,8 +10,8 @@
 <div class="container">
     <form id="signup" action="." method="POST">
         <div class="header">
-            <h3>The Story of Linsanity (2) <br> My Laughable Dream</h3>
-            <h4>林書豪旋風（二）：被嘲笑的夢想</h4>
+            <h3>Linsanity 2.0 <br> Redefine Success</h3>
+            <h4>林書豪旋風2.0：成功的再思</h4>
             <p>You have to fill out this form to get the ticket</p>
         </div>
         <div class="sep"></div>
@@ -26,13 +26,13 @@
             {{ form.email.errors }}
             {{ form.email }}
 
-            <label for="id_school">Which university are you from?</label>
+            <label for="id_school">Which university or organization are you from?</label>
             {{ form.school.errors }}
             {{ form.school }}
 
-            <label for="id_chris"><html>Are you a Christian? <span style="color: #8f8f8f">(Optional)</span></html></label>
-            {{ form.chris.errors }}
-            {{ form.chris }}
+{#            <label for="id_chris"><html>Are you a Christian? <span style="color: #8f8f8f">(Optional)</span></html></label>#}
+{#            {{ form.chris.errors }}#}
+{#            {{ form.chris }}#}
 
             <label for="id_invite"><html>Whom do you want to invite?<br><span style="color: #8f8f8f">(Optional, emails separate by ; or Space or Enter)</span></html></label>
             {{ form.invite.errors }}
@@ -57,4 +57,7 @@
 {#        <p><input type="submit" value="Submit"></p>#}
 {#    </form>#}
 </body>
+<footer>
+To display normally, Chrome, Firefox, Safari or Opera are preferred.
+</footer>
 </html>
