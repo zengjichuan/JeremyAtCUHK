@@ -1,3 +1,4 @@
+# coding: utf-8
 """
 Django settings for JeremyAtCUHK project.
 
@@ -15,7 +16,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
+LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -43,6 +44,7 @@ INSTALLED_APPS = (
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -120,12 +122,20 @@ EMAIL_USE_TLS = True
 
 CACHES = {
     'default': {
-        # 'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-        # 'LOCATION': 'cachetable',
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '127.0.0.1:11211',
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'cachetable',
+        # 'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        # 'LOCATION': '127.0.0.1:11211',
         'TIMEOUT': None,
     }
 }
 
-TICKET_NUM = 100
+ROOT_SITE = 'http://www.cuhk.edu.hk/ccc/chaplaincy/Linsanity2.0'
+
+LANGUAGES = (
+    ('en', 'English'),
+    ('zh-hant', u'中文'),
+)
+
+TICKET_NUM = 10
+

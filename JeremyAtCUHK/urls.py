@@ -17,10 +17,11 @@ from django.conf.urls import patterns, include, url
 from tickets import views
 # from django.contrib import admin
 
-urlpatterns = patterns('',
+urlpatterns = [
     # url(r'^admin/', include(admin.site.urls)),
     url(r'^tickets/$', views.register),
-    (r'^tickets/thanks/$', views.thanks),
-    (r'^tickets/sorry/$', views.sorry),
-    (r'^tickets/check/$', views.checkin),
-)
+    url(r'^tickets/invite/$', views.invite),
+    url(r'^tickets/thanks/$', views.thanks),
+    url(r'^tickets/sorry/$', views.sorry),
+    url(r'^tickets/check/$', views.checkin),
+]

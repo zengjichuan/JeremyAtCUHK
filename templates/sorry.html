@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Linsanity 2.0 – Redefine Success</title>
+    <title>Linsanity 2.0 – Redefining Success</title>
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
 </head>
@@ -10,7 +10,15 @@
     <div class="container">
         <div id="signup">
             <div class="header">
-            <h3>{{ msg }}</h3>
+                {% ifequal msg 'Sorry, your email has been registered!' %}
+                    <h3>Sorry, your email has been registered!</h3>
+                {% endifequal %}
+                {% ifequal msg 'Sorry, all tickets sold out.' %}
+                    <h3>Oooop! All the tickets have been taken!</h3>
+                    <p>Thank you for your interest in the Event.  However all the online tickets have already been taken.</p>
+                    <p>You may still participate in the Event remotely by viewing the live webcast at the following webpage:</p>
+                    <p>http://www.cuhk.edu.hk/chaplain/xxxxx</p>
+                {% endifequal %}
             </div>
         </div>
     </div>
