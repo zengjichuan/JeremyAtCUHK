@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html>
+{% load i18n %}
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Linsanity 2.0 – Redefining Success</title>
+    <title>{% trans "Linsanity 2.0 – Redefining Success" %}</title>
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
 </head>
 <body>
-{% load i18n %}
     <div class="container">
         <form id="signup" action="." method="POST">
             <div class="header">
-            <h3>Congratulation! </h3>
-            <h4>You have successfully registered for the ticket for Linsanity 2.0 – Redefining Success!</h4>
+            <h3>{% trans "Congratulation!" %}</h3>
+            <h4>{% trans "You have successfully registered for the ticket for Linsanity 2.0 – Redefining Success!" %}</h4>
             </div>
             <div class="sep"></div>
-            <p>A confirmation email has been sent to your registered email account, in which you will be provided with a QR code which serves as an electronic ticket for your admission to the Event.  Each QR code only permits the entrance of one individual, and it must be presented and verified at the entrance before admission.  Once it is used, the QR code is cancelled and is no longer valid for the admission of anyone later.</p>
+            <p>{% trans "A confirmation email has been sent to your registered email account, in which you will be provided with a QR code which serves as an electronic ticket for your admission to the Event.  Each QR code only permits the entrance of one individual, and it must be presented and verified at the entrance before admission. Once it is used, the QR code is cancelled and is no longer valid for the admission of anyone later." %}</p>
             <div class="inputs">
                 {% csrf_token %}
-                <label for="id_invite"><html>Do you wish to recommend your friends to register for the Event? Please insert their email address below:<br><span style="color: #8f8f8f">(maximum: 10 email addresses separated by ";" or Space or Enter)</span></html></label>
+                <label for="id_invite"><html>{% trans "Do you wish to recommend your friends to register for the Event? Please insert their email address below:" %}<br><span style="color: #8f8f8f">({% trans "maximum: 10 email addresses separated by “;” or Space or Enter" %})</span></html></label>
                 {{ form.invite.errors }}
                 {{ form.invite }}
-                <input id="invite" type="submit" value="SEND INVITATIONS">
+                <input id="invite" type="submit" value="{% trans "SEND INVITATIONS" %}">
             </div>
         </form>
     </div>

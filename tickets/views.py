@@ -9,6 +9,7 @@ from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
+from django.core.urlresolvers import reverse
 from EmailMultiRelated import *
 from django.core.cache import cache
 from MyException import UserAlreadyRegisteredError, TicketSoldOutError
@@ -31,7 +32,7 @@ def register(requset):
             except Exception as e:
                 msg = e.message
                 requset.session['msg'] = msg
-                return HttpResponseRedirect('/tickets/sorry/')
+                return HttpResponseRedirect(reverse('sorry'))
             if email_to_send:
                 email, email_qr, email_id = email_to_send
                 qrfile_path = generate_qrcode(email_qr)
@@ -39,7 +40,7 @@ def register(requset):
                 send_email(name, email, qrfile_path)
                 requset.session['email_id'] = email_id
                 requset.session['name'] = name
-            return HttpResponseRedirect('/tickets/invite/')
+            return HttpResponseRedirect(reverse('invite'))
     else:
         form = UserForm()
     return render_to_response('register.html', {'form': form}, RequestContext(requset))
@@ -60,7 +61,7 @@ def invite(request):
                 invite_send_list, error_email_list = insertdb_invite(email_id, invitelst)
                 send_invite(name, invite_send_list)
                 request.session['errors'] = error_email_list
-                return HttpResponseRedirect('/tickets/thanks/')
+                return HttpResponseRedirect(reverse('thanks'))
         else:
             return HttpResponseRedirect('/tickets/')
     elif request.session.has_key('email_id') and request.session.has_key('name'):
@@ -68,7 +69,7 @@ def invite(request):
         return render_to_response('invite.html', {'form': form}, RequestContext(request))
     else:
         # in order to prevent visit directly
-        return HttpResponseRedirect('/tickets/')
+        return HttpResponseRedirect(reverse('register'))
 
 # check request from mobile
 def checkin(request):

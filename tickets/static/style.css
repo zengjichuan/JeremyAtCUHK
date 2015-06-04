@@ -1,7 +1,8 @@
 body {
     /*background-image: url(http://kreativo.se/backlogin.jpg);*/
     /*background-image: url(backlogin.jpg);*/
-    background: url(linsanity_screengrab_74_2.jpg) no-repeat;
+    background: url(bg.png) no-repeat;
+    background-position: center top;
     font-family: "Helvetica Neue", Helvetica, Arial;
     padding-top: 20px;
 }
@@ -254,8 +255,14 @@ ul.errorlist {
         to(#b9c5dd));
 }
 
+#switcher {
+    float:right;
+    margin-top:0px;
+    margin-right:10px;
+}
+
 footer {
-    color: #ffffff;
+    color: #303030;
     font-size: 10px;
     text-align: center;
     margin-left:auto;

@@ -1,32 +1,40 @@
 <!DOCTYPE html>
 <html>
+{% load i18n %}
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Linsanity 2.0 – Redefining Success</title>
+    <title>{% trans "Linsanity 2.0 – Redefining Success" %}</title>
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
 </head>
 <body>
-{% load i18n %}
+{% get_available_languages as languages %}
+<p id="switcher">
+    {% for lang_code, lang_name in languages %}
+    {% language lang_code %}
+    <a href="{% url 'register' %}">{{ lang_name }} </a>
+    {% endlanguage %}
+    {% endfor %}
+</p>
 <div class="container">
     <form id="signup" action="." method="POST">
         <div class="header">
-            <h3>Linsanity 2.0 <br><span style="font-style: italic">Redefining Success</span></h3>
-            <p>Please fill in the online form below to register for free ticket for “Linsanity 2.0 – Redefining Success”</p>
+            <h3>{% trans "Linsanity 2.0" %}<br><span style="font-style: italic">{% trans "Redefining Success" %}</span></h3>
+            <p>{% trans "Please fill in the online form below to register for free ticket for “Linsanity 2.0 – Redefining Success”" %}</p>
         </div>
         <div class="sep"></div>
         <div class="inputs">
             {% csrf_token %}
-            <label for="id_name">Name:</label>
+            <label for="id_name">{% trans "Name:" %}</label>
             {{ form.name.errors }}
             {{ form.name }}
 
             <br>
-            <label for="id_email">Email:</label>
+            <label for="id_email">{% trans "Email:" %}</label>
             {{ form.email.errors }}
             {{ form.email }}
 
-            <label for="id_school">Which tertiary institution are you studying?</label>
+            <label for="id_school">{% trans "Which tertiary institution are you studying?" %}</label>
             {{ form.school.errors }}
             {{ form.school }}
 
@@ -38,7 +46,7 @@
 {#            {{ form.invite.errors }}#}
 {#            {{ form.invite }}#}
 
-            <input id="submit" type="submit" value="SIGN UP FOR TICKET NOW">
+            <input id="submit" type="submit" value="{% trans "SIGN UP FOR TICKET NOW" %}">
 
         </div>
     </form>
@@ -57,7 +65,7 @@
 {#        <p><input type="submit" value="Submit"></p>#}
 {#    </form>#}
 <footer>
-To display normally, Chrome, Firefox, Safari or Opera are preferred.
+{% trans "To display normally, Chrome, Firefox, Safari or Opera are preferred." %}
 </footer>
 </body>
 </html>

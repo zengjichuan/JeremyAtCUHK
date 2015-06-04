@@ -1,17 +1,18 @@
 __author__ = 'admin'
 from django import forms
+from django.utils.translation import ugettext_lazy as _
 
 SCHOOL_CHOICES = (
-    ('CUHK', 'Chinese University of Hong Kong'),
-    ('CityU', 'City University of Hong Kong'),
-    ('HKBU', 'Hong Kong Baptist University'),
-    ('HKU', 'Hong Kong University'),
-    ('PolyU', 'Hong Kong Polytechnic University'),
-    ('HKUST', 'Hong Kong University of Science and Technology'),
-    ('LNU', 'Lingnan University'),
-    ('OUHK', 'Open University of Hong Kong'),
-    ('OtherU', 'Other tertiary institution of Hong Kong'),
-    ('Other', 'Others'),
+    ('CUHK', _('Chinese University of Hong Kong')),
+    ('CityU', _('City University of Hong Kong')),
+    ('HKBU', _('Hong Kong Baptist University')),
+    ('HKU', _('Hong Kong University')),
+    ('PolyU', _('Hong Kong Polytechnic University')),
+    ('HKUST', _('Hong Kong University of Science and Technology')),
+    ('LNU', _('Lingnan University')),
+    ('OUHK', _('Open University of Hong Kong')),
+    ('OtherU', _('Other tertiary institution of Hong Kong')),
+    ('Other', _('Others')),
 )
 
 CHRISTIAN_CHOICES = (
