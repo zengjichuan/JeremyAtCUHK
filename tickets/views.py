@@ -140,7 +140,7 @@ def insertdb_invite(email_id, invitelst):
 
 def send_invite(name, invite_email_list):
     html = render_to_string('invitation.html', {'name': name})
-    invite_msg = EmailMultiAlternatives('Invite: Jeremy At CUHK', 'Plain text version',
+    invite_msg = EmailMultiAlternatives('林書豪旋風2.0 – 成功的再思 Linsanity 2.0 – Redefining Success', 'Plain text version',
                               'zengjichuan@outlook.com', invite_email_list)
     invite_msg.attach_alternative(html, 'text/html')
     invite_msg.send()
