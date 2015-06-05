@@ -3,14 +3,15 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 
 SCHOOL_CHOICES = (
-    ('CUHK', _('Chinese University of Hong Kong')),
     ('CityU', _('City University of Hong Kong')),
     ('HKBU', _('Hong Kong Baptist University')),
-    ('HKU', _('Hong Kong University')),
+    ('LNU', _('Lingnan University')),
+    ('CUHK', _('Chinese University of Hong Kong')),
+    ('HKIEd', _('The Hong Kong Institute of Education')),
     ('PolyU', _('Hong Kong Polytechnic University')),
     ('HKUST', _('Hong Kong University of Science and Technology')),
-    ('LNU', _('Lingnan University')),
-    ('OUHK', _('Open University of Hong Kong')),
+    ('HKU', _('Hong Kong University')),
+    # ('OUHK', _('Open University of Hong Kong')),
     ('OtherU', _('Other tertiary institution of Hong Kong')),
     ('Other', _('Others')),
 )

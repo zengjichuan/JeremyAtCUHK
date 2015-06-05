@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-04 16:03+0800\n"
+"POT-Creation-Date: 2015-06-05 09:46+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,7 +23,9 @@ msgid "Linsanity 2.0 – Redefining Success"
 msgstr "林書豪旋風2.0 – 成功的再思"
 
 #: .\templates\invite.html:14
-msgid "Congratulation!"
+#, fuzzy
+#| msgid "Congratulation!"
+msgid "Congratulations!"
 msgstr "恭喜！"
 
 #: .\templates\invite.html:15
@@ -40,7 +42,8 @@ msgid ""
 "entrance of one individual, and it must be presented and verified at the "
 "entrance before admission. Once it is used, the QR code is cancelled and is "
 "no longer valid for the admission of anyone later."
-msgstr "一封確認登記的電郵已經發送至您剛才登記的電郵戶口，內有QR碼，作為活動當日進場"
+msgstr ""
+"一封確認登記的電郵已經發送至您剛才登記的電郵戶口，內有QR碼，作為活動當日進場"
 "的電子門券。您必須在入場時展示這個QR碼，以供掃描。每個QR碼祇供一人進場，一經"
 "使用，該QR碼即會被註消，不能再供其他人使用。"
 
@@ -58,37 +61,37 @@ msgstr "最多十個，每個電郵地址之間，以“;”、空格或者輸�
 msgid "SEND INVITATIONS"
 msgstr "發送邀請"
 
-#: .\templates\register.html:15
+#: .\templates\register.html:22
 msgid "Linsanity 2.0"
 msgstr "林書豪旋風2.0"
 
-#: .\templates\register.html:15
+#: .\templates\register.html:22
 msgid "Redefining Success"
 msgstr "成功的再思"
 
-#: .\templates\register.html:16
+#: .\templates\register.html:23
 msgid ""
 "Please fill in the online form below to register for free ticket for "
 "“Linsanity 2.0 – Redefining Success”"
 msgstr "請填妥以下電子表格，登記索取「林書豪旋風2.0 – 成功的再思」電子門券"
 
-#: .\templates\register.html:21
+#: .\templates\register.html:28
 msgid "Name:"
 msgstr "姓名："
 
-#: .\templates\register.html:26
+#: .\templates\register.html:33
 msgid "Email:"
 msgstr "電郵："
 
-#: .\templates\register.html:30
+#: .\templates\register.html:37
 msgid "Which tertiary institution are you studying?"
 msgstr "您目前在哪一家香港專上學院就讀？"
 
-#: .\templates\register.html:42
+#: .\templates\register.html:49
 msgid "SIGN UP FOR TICKET NOW"
 msgstr "前往登記"
 
-#: .\templates\register.html:61
+#: .\templates\register.html:68
 msgid "To display normally, Chrome, Firefox, Safari or Opera are preferred."
 msgstr "為了正常顯示，請使用Chrome、Firefox、Safari或者Opera流覽器"
 
@@ -123,41 +126,45 @@ msgid ""
 msgstr "閣下邀請的朋友將收到「林書豪旋風2.0 - 成功的再思」的活動資料。"
 
 #: .\tickets\forms.py:6
-msgid "Chinese University of Hong Kong"
-msgstr "香港中文大學"
-
-#: .\tickets\forms.py:7
 msgid "City University of Hong Kong"
 msgstr "香港城市大學"
 
-#: .\tickets\forms.py:8
+#: .\tickets\forms.py:7
 msgid "Hong Kong Baptist University"
 msgstr "香港浸會大學"
 
-#: .\tickets\forms.py:9
-msgid "Hong Kong University"
-msgstr "香港大學"
-
-#: .\tickets\forms.py:10
-msgid "Hong Kong Polytechnic University"
-msgstr "香港理工大學"
-
-#: .\tickets\forms.py:11
-msgid "Hong Kong University of Science and Technology"
-msgstr "香港科技大學"
-
-#: .\tickets\forms.py:12
+#: .\tickets\forms.py:8
 msgid "Lingnan University"
 msgstr "嶺南大學"
 
+#: .\tickets\forms.py:9
+msgid "Chinese University of Hong Kong"
+msgstr "香港中文大學"
+
+#: .\tickets\forms.py:10
+msgid "The Hong Kong Institute of Education"
+msgstr "香港教育學院"
+
+#: .\tickets\forms.py:11
+msgid "Hong Kong Polytechnic University"
+msgstr "香港理工大學"
+
+#: .\tickets\forms.py:12
+msgid "Hong Kong University of Science and Technology"
+msgstr "香港科技大學"
+
 #: .\tickets\forms.py:13
+msgid "Hong Kong University"
+msgstr "香港大學"
+
+#: .\tickets\forms.py:14
 msgid "Open University of Hong Kong"
 msgstr "香港公開大學"
 
-#: .\tickets\forms.py:14
+#: .\tickets\forms.py:15
 msgid "Other tertiary institution of Hong Kong"
 msgstr "其他香港專上學院"
 
-#: .\tickets\forms.py:15
+#: .\tickets\forms.py:16
 msgid "Others"
 msgstr "其他人士"
